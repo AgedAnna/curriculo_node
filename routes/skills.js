@@ -32,11 +32,11 @@ router.get("/:id", async (req, res) => {
 
 // Criar nova habilidade
 router.post("/", async (req, res) => {
-  const { skill_name, proficiency_level } = req.body;
+  const { skill_name, proficiency_level, user_id } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO skills (skill_name, proficiency_level) VALUES ($1, $2) RETURNING *",
-      [skill_name, proficiency_level]
+      "INSERT INTO skills (skill_name, proficiency_level, user_id) VALUES ($1, $2, $3) RETURNING *",
+      [skill_name, proficiency_level, user_id]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {

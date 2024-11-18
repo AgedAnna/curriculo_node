@@ -42,11 +42,12 @@ router.post("/", async (req, res) => {
     end_date,
     grade,
     description,
+    user_id,
   } = req.body;
   try {
     const result = await pool.query(
-      `INSERT INTO education (institution, degree, field_of_study, start_date, end_date, grade, description)
-       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+      `INSERT INTO education (institution, degree, field_of_study, start_date, end_date, grade, description, user_id)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
       [
         institution,
         degree,
@@ -55,6 +56,7 @@ router.post("/", async (req, res) => {
         end_date,
         grade,
         description,
+        user_id,
       ]
     );
     res.status(201).json(result.rows[0]);

@@ -35,13 +35,13 @@ router.get("/:id", async (req, res) => {
 
 // Criar nova experiência profissional
 router.post("/", async (req, res) => {
-  const { company, position, start_date, end_date, responsibilities } =
+  const { company, position, start_date, end_date, responsibilities, user_id } =
     req.body;
   try {
     const result = await pool.query(
-      `INSERT INTO work_experience (company, position, start_date, end_date, responsibilities)
-       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [company, position, start_date, end_date, responsibilities]
+      `INSERT INTO work_experience (company, position, start_date, end_date, responsibilities,user_id)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [company, position, start_date, end_date, responsibilities, user_id]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
