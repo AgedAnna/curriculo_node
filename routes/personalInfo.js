@@ -33,7 +33,7 @@ router.get("/:id", async (req, res) => {
 
 // Criar nova informação pessoal
 router.post("/", async (req, res) => {
-  const { name, email, phone, address, summary } = req.body;
+  const { name, email, phone, address, summary, user_id } = req.body;
   try {
     const result = await pool.query(
       "INSERT INTO personal_info (name, email, phone, address, summary, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
