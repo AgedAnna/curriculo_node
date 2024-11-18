@@ -32,7 +32,6 @@ router.get("/:userId", async (req, res) => {
       [userId]
     );
 
-    // Executar todas as promessas em paralelo
     const [
       personalInfoResult,
       educationResult,
@@ -45,7 +44,6 @@ router.get("/:userId", async (req, res) => {
       skillsPromise,
     ]);
 
-    // Montar o objeto de resposta
     const userDetails = {
       personalInfo: personalInfoResult.rows[0] || {},
       education: educationResult.rows,
