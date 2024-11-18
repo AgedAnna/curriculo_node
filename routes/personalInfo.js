@@ -36,8 +36,8 @@ router.post("/", async (req, res) => {
   const { name, email, phone, address, summary } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO personal_info (name, email, phone, address, summary) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [name, email, phone, address, summary]
+      "INSERT INTO personal_info (name, email, phone, address, summary, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [name, email, phone, address, summary, user_id]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
